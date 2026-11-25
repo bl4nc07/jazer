@@ -1,1 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#d71935">
+    <meta name="description" content="Servicio de inspección, mantenimiento y recarga de extintores en Bogotá. Consulta cobertura y cotiza a domicilio.">
+    <title>ECINTORES CAPITAL | Recarga y mantenimiento</title>
+    <style>
+        :root {
+            --red: #6c2bd9;
+            --red2: #43139b;
+            --yellow: #ff8a00;
+            --white: #fff;
+            --ink: #20152f;
+            --muted: #665d75;
+            --line: #e7def3;
+            --soft: #f7f2ff;
+            --bg: #fff;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        button, input, select, textarea {
+            font: inherit;
+        }
+        .shell {
+            width: min(1160px, calc(100% - 36px));
+            margin: auto;
+        }
+        .ambient {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(ellipse at 85% 8%, #ff8a0024, transparent 34%),
+                        radial-gradient(ellipse at 4% 65%, #6c2bd910, transparent 38%);
+        }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: #ffffffed;
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--line);
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 76px;
+            gap: 18px;
+        }
+        .logo {
+            font-weight: 900;
+            font-size: 23px;
+            letter-spacing: -1px;
+            color: var(--ink);
+        }
+        .logo b {
+            color: var(--red);
+        }
+        .logo-mark {
+            display: inline-grid;
+            place-items: center;
+            width: 36px;
+            height: 36px;
+            margin-right: 7px;
+            background: var(--red);
+            color: #fff;
+            border-radius: 12px;
+            transform: rotate(-7deg);
+        }
+        .navlinks {
+            display: flex;
+            gap: 21px;
+            font-size: 13px;
+            color: #555d6a;
+        }
+        .navlinks a:hover {
+            color: var(--red);
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 0;
+            border-radius: 14px;
+            padding: 14px 20px;
+            font-weight: 800;
+            transition: .25s;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+        .btn-red {
+            background: var(--red);
+            color: #fff;
+            box-shadow: 0 10px 25px #6c2bd924;
+        }
+        .btn-yellow {
+            background: var(--yellow);
+            color: #272727;
+        }
+        .btn-outline {
+            background: #fff;
+            border: 1px solid #d9dbe1;
+            color: var(--ink);
+        }
+        .hero {
+            padding: 82px 0 70px;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 42px;
+            align-items: center;
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--red);
+            border: 1px solid #6c2bd940;
+            border-radius: 30px;
+            padding: 9px 14px;
+            background: #6c2bd909;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--yellow);
+            box-shadow: 0 0 0 4px #ff8a0055;
+        }
+        h1, h2, h3 {
+            letter-spacing: -.045em;
+        }
+        h1 {
+            font-size: clamp(48px, 6vw, 82px);
+            line-height: .99;
+            margin: 22px 0;
+        }
+        .accent {
+            color: var(--red);
+        }
+        .hero p, .intro {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 16px;
+            max-width: 560px;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 28px 0;
+        }
+        .micro {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            color: #555d6a;
+            font-size: 12px;
+        }
+        .micro span:before {
+            content: "✓ ";
+            color: var(--red);
+            font-weight: bold;
+        }
+        .art {
+            min-height: 450px;
+            position: relative;
+            display: grid;
+            place-items: center;
+        }
+        .halo {
+            position: absolute;
+            width: min(410px, 90%);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 25%, #ffe2b8, #ff8a00 48%, #ffb02e);
+            box-shadow: 0 0 0 22px #ff8a0022, 0 0 0 55px #6c2bd910;
+            animation: breathe 5s ease-in-out infinite;
+        }
+        .extinguisher {
+            position: relative;
+            width: 205px;
+            height: 315px;
+            filter: drop-shadow(0 24px 25px #30104d33);
+            animation: float 5s ease-in-out infinite;
+        }
+        .handle {
+            position: absolute;
+            left: 64px;
+            top: 0;
+            width: 78px;
+            height: 67px;
+            border: 15px solid #333;
+            border-bottom: 0;
+            border-radius: 20px 20px 0 0;
+        }
+        .neck {
+            position: absolute;
+            top: 49px;
+            left: 73px;
+            width: 60px;
+            height: 35px;
+            background: #333;
+            border-radius: 8px 8px 2px 2px;
+        }
+        .tank {
+            position: absolute;
+            inset: 72px 0 0;
+            border-radius: 48px 48px 30px 30px;
+            background: linear-gradient(100deg, #43139b, #8b4df0 40%, #5520b4 78%, #32106f);
+            box-shadow: inset -13px 0 18px #260c5666, inset 12px 0 16px #ffffff40;
+        }
+        .tank:before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            top: 48px;
+            border-top: 2px solid #ffffff88;
+        }
+        .label-tank {
+            position: absolute;
+            top: 142px;
+            left: 16px;
+            right: 16px;
+            padding: 17px 5px;
+            background: #fff;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--red);
+            font-weight: 900;
+            font-size: 21px;
+        }
+        .label-tank small {
+            display: block;
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            color: #333;
+            margin-top: 5px;
+        }
+        .hose {
+            position: absolute;
+            right: -19px;
+            top: 84px;
+            width: 37px;
+            height: 116px;
+            border: 9px solid #222;
+            border-left: 0;
+            border-radius: 0 24px 24px 0;
+            transform: rotate(-8deg);
+        }
+        .float-card {
+            position: absolute;
+            z-index: 2;
+            padding: 14px 18px;
+            border: 1px solid #ffffff;
+            background: #ffffffed;
+            border-radius: 17px;
+            box-shadow: 0 12px 30px #30104d18;
+            font-weight: 800;
+        }
+        .float-card.one {
+            top: 13%;
+            left: 0;
+            transform: rotate(-6deg);
+        }
+        .float-card.two {
+            bottom: 10%;
+            right: 0;
+            transform: rotate(5deg);
+        }
+        .float-card em {
+            font-style: normal;
+            color: var(--red);
+        }
+        .band {
+            background: var(--yellow);
+            color: #302a1a;
+            overflow: hidden;
+            padding: 15px 0;
+            transform: rotate(-1deg);
+            margin: 15px 0 25px;
+        }
+        .band-track {
+            white-space: nowrap;
+            font-weight: 900;
+            font-size: 16px;
+            letter-spacing: 1px;
+            animation: marquee 27s linear infinite;
+        }
+        .band-track span {
+            padding-right: 38px;
+        }
+        .section {
+            padding: 78px 0;
+        }
+        .section-head {
+            max-width: 720px;
+            margin-bottom: 32px;
+        }
+        .kicker {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            font-weight: 900;
+        }
+        .section h2 {
+            font-size: clamp(34px, 4.2vw, 55px);
+            line-height: 1.06;
+            margin: 13px 0;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .card {
+            padding: 27px;
+            border: 1px solid var(--line);
+            background: linear-gradient(140deg, #fff, #fbf8ff);
+            border-radius: 23px;
+            transition: .25s;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #e99aa5;
+            box-shadow: 0 15px 35px #6c2bd910;
+        }
+        .card-icon {
+            width: 53px;
+            height: 53px;
+            display: grid;
+            place-items: center;
+            background: #fff0b9;
+            border-radius: 16px;
+            font-size: 25px;
+        }
+        .card h3 {
+            font-size: 20px;
+            margin: 20px 0 8px;
+        }
+        .card p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin: 0;
+            font-size: 14px;
+        }
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+        .panel {
+            border: 1px solid var(--line);
+            background: #fff;
+            border-radius: 25px;
+            padding: 31px;
+            box-shadow: 0 12px 35px #22222206;
+        }
+        .panel h3 {
+            font-size: 26px;
+            margin: 0 0 13px;
+        }
+        .steps {
+            display: grid;
+            gap: 18px;
+            margin-top: 24px;
+        }
+        .step {
+            display: flex;
+            gap: 15px;
+        }
+        .number {
+            flex: none;
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: var(--red);
+            color: white;
+            font-weight: 900;
+        }
+        .step strong {
+            display: block;
+            margin: 0 0 5px;
+        }
+        .step p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        .form-panel {
+            background: linear-gradient(145deg, #fff7e5, #fff);
+        }
+        label {
+            display: block;
+            margin: 15px 0 7px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+        input, select, textarea {
+            width: 100%;
+            border: 1px solid #dfe1e6;
+            background: #fff;
+            color: var(--ink);
+            border-radius: 12px;
+            padding: 14px;
+            outline: none;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--red);
+        }
+        .form-panel .btn {
+            width: 100%;
+            margin-top: 19px;
+        }
+        .note {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .coverage {
+            background: #fff9ec;
+            border-top: 1px solid #f4e8c9;
+            border-bottom: 1px solid #f4e8c9;
+        }
+        .chips {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+        .chips span {
+            border: 1px solid #e9d9ad;
+            padding: 10px 15px;
+            border-radius: 40px;
+            background: #fff;
+            font-size: 13px;
+        }
+        .faq {
+            max-width: 850px;
+            margin: auto;
+        }
+        .faq details {
+            border-bottom: 1px solid var(--line);
+            padding: 19px 4px;
+        }
+        .faq summary {
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 17px;
+        }
+        .faq details p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+        .cta {
+            border-radius: 30px;
+            background: linear-gradient(115deg, var(--red), #43139b);
+            color: #fff;
+            padding: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+        .cta h2 {
+            font-size: clamp(32px, 4vw, 50px);
+            margin: 0 0 10px;
+        }
+        .cta p {
+            max-width: 530px;
+            line-height: 1.65;
+            color: #ffe9ec;
+        }
+        .cta .btn {
+            background: var(--yellow);
+            color: #272727;
+            white-space: nowrap;
+        }
+        footer {
+            padding: 42px 0;
+            color: #6c7280;
+            font-size: 13px;
+        }
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .footer-links a:hover {
+            color: var(--red);
+        }
+        .wa {
+            position: fixed;
+            right: 21px;
+            bottom: 21px;
+            z-index: 25;
+            display: grid;
+            place-items: center;
+            width: 58px;
+            height: 58px;
+            border-radius: 19px;
+            background: #25d366;
+            color: #07351c;
+            box-shadow: 0 8px 30px #25d36655;
+            font-size: 26px;
+            font-weight: 900;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: .65s;
+        }
+        .reveal.show {
+            opacity: 1;
+            transform: none;
+        }
+        .legal {
+            max-width: 900px;
+            padding: 55px 0 80px;
+        }
+        .legal h1 {
+            font-size: clamp(38px, 5vw, 58px);
+        }
+        .legal h2 {
+            margin-top: 32px;
+            font-size: 24px;
+        }
+        .legal p, .legal li {
+            color: #555d6a;
+            line-height: 1.8;
+        }
+        .legal .notice {
+            padding: 18px;
+            border-left: 4px solid var(--yellow);
+            background: #fff9e8;
+            border-radius: 10px;
+        }
+        .cookie-banner {
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            bottom: auto;
+            transform: translate(-50%, -50%);
+            width: min(520px, calc(100% - 28px));
+            padding: 28px;
+            border: 1px solid #f1d9a1;
+            border-radius: 22px;
+            background: #fff;
+            color: var(--ink);
+            box-shadow: 0 24px 90px #0005;
+        }
+        .cookie-banner:before {
+            content: "";
+            position: fixed;
+            inset: -100vh -100vw;
+            background: #15151599;
+            z-index: -1;
+        }
+        .cookie-banner h3 {
+            font-size: 23px;
+            margin: 0;
+        }
+        .cookie-banner p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+        .cookie-banner a {
+            color: var(--red);
+            text-decoration: underline;
+        }
+        .cookie-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .cookie-actions button, .cookie-settings button {
+            min-height: 42px;
+            border-radius: 11px;
+            padding: 10px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .cookie-accept {
+            grid-column: 1/-1;
+            border: 0;
+            background: var(--red);
+            color: #fff;
+            min-height: 48px;
+        }
+        .cookie-reject, .cookie-customize, .cookie-cancel {
+            background: #fff;
+            border: 1px solid #d9dbe1;
+            color: var(--ink);
+        }
+        .cookie-settings {
+            position: fixed;
+            z-index: 1002;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            padding: 18px;
+            background: #16161688;
+        }
+        .cookie-settings-card {
+            width: min(470px, 100%);
+            padding: 26px;
+            border-radius: 22px;
+            background: #fff;
+            max-height: 90vh;
+            overflow: auto;
+        }
+        .cookie-category {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .cookie-category small {
+            display: block;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+        .cookie-category input {
+            width: 20px;
+            accent-color: var(--red);
+        }
+        .cookie-settings-actions {
+            display: grid;
+            gap: 8px;
+            margin-top: 18px;
+        }
+        .cookie-save {
+            background: var(--red);
+            color: #fff;
+            border: 0;
+        }
+        .cookie-reopen {
+            position: fixed;
+            z-index: 900;
+            bottom: 22px;
+            left: 22px;
+            width: 45px;
+            height: 45px;
+            border-radius: 14px;
+            border: 1px solid #ddd;
+            background: #fff;
+            color: var(--red);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .cookie-banner[hidden], .cookie-settings[hidden], .cookie-reopen[hidden] {
+            display: none !important;
+        }
+        @keyframes float {
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes breathe {
+            50% { transform: scale(1.035); }
+        }
+        @keyframes marquee {
+            to { transform: translateX(-35%); }
+        }
+        @media (max-width: 850px) {
+            .navlinks { display: none; }
+            .hero-grid, .split { grid-template-columns: 1fr; }
+            .hero { padding: 55px 0; }
+            .art { min-height: 420px; }
+            .cards { grid-template-columns: repeat(2, 1fr); }
+            .cta { flex-direction: column; align-items: flex-start; }
+        }
+        @media (max-width: 580px) {
+            .nav { min-height: 68px; }
+            .nav > .btn { padding: 11px; font-size: 12px; }
+            .logo { font-size: 20px; }
+            .art { min-height: 350px; }
+            .halo { width: 290px; }
+            .extinguisher { transform: scale(.8); }
+            .float-card { font-size: 12px; padding: 10px; }
+            .cards { grid-template-columns: 1fr; }
+            .section { padding: 60px 0; }
+            .panel { padding: 23px; }
+            .cta { padding: 30px 23px; }
+            .cta .btn { white-space: normal; }
+            .cookie-banner { left: 12px; top: 50%; transform: translate(0, -50%); width: calc(100% - 24px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *:before, *:after { animation: none !important; scroll-behavior: auto !important; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient"></div>
+    <header>
+        <div class="shell nav">
+            <a class="logo" href="index.html"><span class="logo-mark">✳</span>ECINTORES <b>CAPITAL</b></a>
+            <nav class="navlinks">
+                <a href="#servicios">Servicios</a>
+                <a href="#protocolos">Protocolos</a>
+                <a href="#cobertura">Cobertura</a>
+                <a href="#preguntas">Preguntas</a>
+            </nav>
+            <a class="btn btn-red" data-wa href="#">Solicitar servicio ↗</a>
+        </div>
+    </header>
+    <main>
+        <section class="hero" id="inicio">
+            <div class="shell hero-grid">
+                <div>
+                    <span class="eyebrow"><span class="dot"></span> Seguridad contra incendios · Bogotá</span>
+                    <h1>Tu seguridad<br>no puede <span class="accent">esperar.</span></h1>
+                    <p>En <strong>ECINTORES CAPITAL</strong> ofrecemos orientación y atención para inspección, mantenimiento y recarga de extintores. Coordinamos la recogida o atención a domicilio en Bogotá, según disponibilidad y tipo de equipo.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-red" data-wa href="#">Cotizar servicio ↗</a>
+                        <a class="btn btn-outline" href="#servicios">Conocer servicios</a>
+                    </div>
+                    <div class="micro">
+                        <span>Atención en Bogotá</span>
+                        <span>Consulta a domicilio</span>
+                        <span>Cotización previa</span>
+                    </div>
+                </div>
+                <div class="art" aria-label="Ilustración de un extintor">
+                    <div class="halo"></div>
+                    <div class="float-card one">🧯 Mantenimiento<br><em>y recarga</em></div>
+                    <div class="extinguisher">
+                        <div class="handle"></div>
+                        <div class="neck"></div>
+                        <div class="tank">
+                            <div class="label-tank">EXTINTOR<small>SEGURIDAD Y PREVENCIÓN</small></div>
+                        </div>
+                        <div class="hose"></div>
+                    </div>
+                    <div class="float-card two">📍 Servicio<br><em>en Bogotá</em></div>
+                </div>
+            </div>
+        </section>
+        <div class="band">
+            <div class="band-track">
+                <span>✳ PREVENCIÓN</span>
+                <span>✳ INSPECCIÓN</span>
+                <span>✳ MANTENIMIENTO</span>
+                <span>✳ RECARGA</span>
+                <span>✳ SEGURIDAD CONTRA INCENDIOS</span>
+                <span>✳ PREVENCIÓN</span>
+            </div>
+        </div>
+        <section class="section" id="servicios">
+            <div class="shell">
+                <div class="section-head reveal">
+                    <span class="kicker">Nuestros servicios</span>
+                    <h2>Equipos listos para <span class="accent">responder.</span></h2>
+                    <p class="intro">Solicita una evaluación del equipo y recibe una cotización según el tipo, capacidad, estado y ubicación del extintor.</p>
+                </div>
+                <div class="cards">
+                    <article class="card reveal">
+                        <div class="card-icon">🧯</div>
+                        <h3>Recarga de extintores</h3>
+                        <p>Servicio según el agente extintor, modelo, instrucciones del fabricante y condición técnica del equipo.</p>
+                    </article>
+                    <article class="card reveal">
+                        <div class="card-icon">🔍</div>
+                        <h3>Inspección</h3>
+                        <p>Revisión visual del estado, accesibilidad, señalización, manómetro cuando aplique, pasador, sello y condición general.</p>
+                    </article>
+                    <article class="card reveal">
+                        <div class="card-icon">🛠️</div>
+                        <h3>Mantenimiento</h3>
+                        <p>Evaluación de componentes, cilindro, válvula, manguera, boquilla y demás partes de acuerdo con el tipo de extintor.</p>
+                    </article>
+                    <article class="card reveal">
+                        <div class="card-icon">🚚</div>
+                        <h3>Servicio a domicilio</h3>
+                        <p>Coordinación de recogida o atención en la ubicación indicada dentro de Bogotá, previa confirmación.</p>
+                    </article>
+                    <article class="card reveal">
+                        <div class="card-icon">🏢</div>
+                        <h3>Empresas y conjuntos</h3>
+                        <p>Atención de solicitudes para oficinas, locales, bodegas, copropiedades y establecimientos comerciales.</p>
+                    </article>
+                    <article class="card reveal">
+                        <div class="card-icon">📋</div>
+                        <h3>Orientación preventiva</h3>
+                        <p>Información general para identificar tipos de extintores, cuidados básicos y recomendaciones de inspección.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="protocolos">
+            <div class="shell split">
+                <div class="panel reveal">
+                    <span class="kicker">Información útil</span>
+                    <h2>Conoce los <span class="accent">protocolos.</span></h2>
+                    <p class="intro">La selección y el servicio de un extintor dependen del riesgo, agente, capacidad, diseño y recomendaciones del fabricante.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <span class="number">01</span>
+                            <div>
+                                <strong>Identificar el tipo de fuego</strong>
+                                <p>Verifica la clase de riesgo y selecciona únicamente un equipo con clasificación adecuada.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="number">02</span>
+                            <div>
+                                <strong>Inspeccionar el equipo</strong>
+                                <p>Comprueba acceso, señalización, integridad física, presión cuando aplique y tarjeta/registro de servicio.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="number">03</span>
+                            <div>
+                                <strong>Servicio por personal competente</strong>
+                                <p>El mantenimiento y recarga deben seguir procedimientos técnicos, manuales y requisitos aplicables.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p><a class="btn btn-yellow" href="#">Leer guía de protocolos ↗</a></p>
+                </div>
+                <div class="panel form-panel" id="cotizar">
+                    <span class="eyebrow"><span class="dot"></span> Solicitud de cotización</span>
+                    <h3 style="margin-top:18px">¿Necesitas servicio?</h3>
+                    <p class="note">Déjanos tus datos y prepara la solicitud para WhatsApp.</p>
+                    <form id="quoteForm">
+                        <label for="nombre">Nombre o empresa</label>
+                        <input id="nombre" required maxlength="90" placeholder="Nombre completo o razón social">
+                        <label for="telefono">Celular de contacto</label>
+                        <input id="telefono" type="tel" required pattern="[0-9+() .-]{7,20}" placeholder="Ej. 300 123 4567">
+                        <label for="zona">Localidad y dirección en Bogotá</label>
+                        <input id="zona" required maxlength="150" placeholder="Barrio, localidad y dirección">
+                        <label for="equipo">Tipo y cantidad de extintores</label>
+                        <input id="equipo" required maxlength="120" placeholder="Ej. 3 ABC de 10 lb, 1 CO₂">
+                        <label for="servicio">Servicio requerido</label>
+                        <select id="servicio" required>
+                            <option value="">Selecciona</option>
+                            <option>Recarga</option>
+                            <option>Inspección y mantenimiento</option>
+                            <option>Recogida y entrega</option>
+                            <option>Asesoría / cotización</option>
+                            <option>No sé, necesito orientación</option>
+                        </select>
+                        <label for="detalle">Observaciones (opcional)</label>
+                        <textarea id="detalle" rows="3" placeholder="Estado, fecha de última recarga, fotos por WhatsApp, etc."></textarea>
+                        <button class="btn btn-red" type="submit">Preparar solicitud ↗</button>
+                        <p class="note">El envío abre WhatsApp. No constituye aceptación de pedido, confirmación de visita ni pago.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="section coverage" id="cobertura">
+            <div class="shell">
+                <span class="kicker">Cobertura</span>
+                <h2>Atención en <span class="accent">Bogotá.</span></h2>
+                <p class="intro">Coordinamos servicios a domicilio en las localidades de Bogotá. La cobertura exacta, disponibilidad, logística y costos se confirman al cotizar. Para municipios cercanos, consulta previamente.</p>
+                <div class="chips">
+                    <span>Usaquén</span><span>Chapinero</span><span>Santa Fe</span><span>San Cristóbal</span><span>Usme</span><span>Tunjuelito</span><span>Bosa</span><span>Kennedy</span><span>Fontibón</span><span>Engativá</span><span>Suba</span><span>Barrios Unidos</span><span>Teusaquillo</span><span>Los Mártires</span><span>Antonio Nariño</span><span>Puente Aranda</span><span>La Candelaria</span><span>Rafael Uribe Uribe</span><span>Ciudad Bolívar</span>
+                </div>
+                <p style="margin-top:22px"><a class="btn btn-red" data-wa href="#">Consultar mi zona ↗</a></p>
+            </div>
+        </section>
+        <section class="section">
+            <div class="shell">
+                <div class="section-head">
+                    <span class="kicker">Tipos de extintores</span>
+                    <h2>Un agente para cada <span class="accent">riesgo.</span></h2>
+                </div>
+                <div class="cards">
+                    <article class="card">
+                        <div class="card-icon">🅰️</div>
+                        <h3>Agua / clase A</h3>
+                        <p>Para materiales combustibles comunes como madera, papel y textiles, únicamente cuando el equipo esté clasificado para ese uso.</p>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">🅱️</div>
+                        <h3>Polvo químico seco ABC</h3>
+                        <p>Equipo multipropósito para riesgos clase A, B y C conforme a su rotulado y clasificación.</p>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>CO₂</h3>
+                        <p>Usado en ciertos riesgos clase B y equipos eléctricos energizados, según clasificación del extintor y evaluación del riesgo.</p>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">🍳</div>
+                        <h3>Químico húmedo</h3>
+                        <p>Diseñado para riesgos de aceites y grasas de cocina (clase K), cuando corresponda.</p>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">🧪</div>
+                        <h3>Polvos especiales</h3>
+                        <p>Para metales combustibles clase D; el agente debe ser específico para el metal involucrado.</p>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">🏷️</div>
+                        <h3>Verifica la etiqueta</h3>
+                        <p>No elijas un extintor solo por su color o apariencia. Revisa la clasificación, instrucciones y limitaciones del fabricante.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="preguntas">
+            <div class="shell faq">
+                <span class="kicker">Resolvemos tus dudas</span>
+                <h2>Preguntas <span class="accent">frecuentes.</span></h2>
+                <details>
+                    <summary>¿Cada cuánto se revisa un extintor?</summary>
+                    <p>La NTC 2885 contempla inspecciones periódicas y mantenimiento al menos anual para los equipos cubiertos por sus disposiciones. Deben considerarse además el fabricante, el tipo de extintor, el ambiente y los requisitos aplicables. No uses esta información como sustituto del programa de inspección del lugar.</p>
+                </details>
+                <details>
+                    <summary>¿La recarga siempre se hace cada año?</summary>
+                    <p>No existe una única respuesta para todos los modelos y agentes. La necesidad de recarga puede surgir después de una descarga, pérdida de presión, mantenimiento que lo requiera o según los intervalos y procedimientos aplicables al equipo. Solicita evaluación técnica.</p>
+                </details>
+                <details>
+                    <summary>¿Atienden a domicilio?</summary>
+                    <p>Coordinamos servicio en Bogotá según localidad, tipo y cantidad de equipos, acceso y disponibilidad. El costo y modalidad se confirman antes de aceptar.</p>
+                </details>
+                <details>
+                    <summary>¿Puedo usar cualquier extintor en un incendio?</summary>
+                    <p>No. Un agente inadecuado puede aumentar el peligro. Prioriza evacuar, activar la alarma y llamar a emergencias. Solo una persona capacitada debe intentar usar un extintor si el fuego es incipiente, existe una salida segura y el equipo es apropiado.</p>
+                </details>
+                <details>
+                    <summary>¿Entregan certificado o tarjeta de servicio?</summary>
+                    <p>La documentación que se entregue dependerá del trabajo efectivamente realizado y de los requisitos aplicables. Confirma antes de contratar qué registro, etiqueta, informe o soporte se incluye. No se ofrece certificación oficial de Bomberos.</p>
+                </details>
+                <details>
+                    <summary>¿Este servicio reemplaza la inspección de Bomberos?</summary>
+                    <p>No. El mantenimiento de extintores no equivale al Concepto Técnico ni a una inspección oficial del Cuerpo Oficial de Bomberos de Bogotá.</p>
+                </details>
+            </div>
+        </section>
+        <section class="section">
+            <div class="shell">
+                <div class="cta">
+                    <div>
+                        <h2>Prevenir también<br>es actuar a tiempo.</h2>
+                        <p>Consulta disponibilidad para inspección, mantenimiento o recarga de tus extintores en Bogotá.</p>
+                    </div>
+                    <a class="btn" data-wa href="#">Cotizar por WhatsApp ↗</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="shell footer-row">
+            <div>
+                <a class="logo" href="#">ECINTORES <b>CAPITAL</b></a>
+                <p>Inspección, mantenimiento y recarga de extintores. Servicio en Bogotá, sujeto a cobertura y confirmación.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Políticas comerciales</a>
+                <a href="#">Términos y condiciones</a>
+                <a href="#">Privacidad</a>
+                <a href="#" data-cookie-open>Cookies</a>
+                <a href="#">Protocolos</a>
+            </div>
+            <p>© <span data-year></span> ECINTORES CAPITAL.</p>
+        </div>
+    </footer>
 
+    <section class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Preferencias de cookies" hidden>
+        <h3>Antes de continuar: configura tus cookies</h3>
+        <p>Usamos almacenamiento necesario para recordar tu elección. Las cookies analíticas y publicitarias son opcionales y solo se activan si las autorizas. Puedes aceptar todas, rechazar las opcionales o personalizar tu decisión. Consulta la <a href="#">política de cookies</a>.</p>
+        <div class="cookie-actions">
+            <button class="cookie-accept" id="cookieAccept">Aceptar cookies</button>
+            <button class="cookie-reject" id="cookieReject">Rechazar opcionales</button>
+            <button class="cookie-customize" id="cookieCustomize">Personalizar</button>
+        </div>
+    </section>
+    <div class="cookie-settings" id="cookieSettings" role="dialog" aria-modal="true" hidden>
+        <div class="cookie-settings-card">
+            <h3>Configurar cookies</h3>
+            <p>Las cookies necesarias permanecen activas para guardar tu elección.</p>
+            <div class="cookie-category">
+                <div><b>Necesarias</b><small>Funcionamiento básico y preferencias.</small></div>
+                <input type="checkbox" checked disabled>
+            </div>
+            <div class="cookie-category">
+                <div><b>Analíticas</b><small>Permiten medir visitas y mejorar el sitio.</small></div>
+                <input id="cookieAnalytics" type="checkbox">
+            </div>
+            <div class="cookie-category">
+                <div><b>Publicidad</b><small>Permiten medir campañas y personalizar anuncios.</small></div>
+                <input id="cookieMarketing" type="checkbox">
+            </div>
+            <div class="cookie-settings-actions">
+                <button class="cookie-save" id="cookieSave">Guardar preferencias</button>
+                <button class="cookie-cancel" id="cookieCancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <button class="cookie-reopen" id="cookieReopen" aria-label="Cambiar preferencias de cookies" hidden>⚙</button>
+    <a class="wa" data-wa href="#" aria-label="Contactar por WhatsApp">✆</a>
+
+    <script>
+        const CONFIG = { whatsapp: "573000000000", company: "ECINTORES CAPITAL" };
+        document.querySelectorAll("[data-year]").forEach(x => x.textContent = new Date().getFullYear());
+        document.querySelectorAll("[data-wa]").forEach(a => {
+            a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Hola, quiero información sobre inspección, mantenimiento o recarga de extintores en Bogotá.")}`;
+        });
+        const form = document.getElementById("quoteForm");
+        if (form) form.addEventListener("submit", e => {
+            e.preventDefault();
+            if (!form.reportValidity()) return;
+            const v = id => document.getElementById(id).value.trim();
+            const msg = `Hola, solicito una cotización de extintores.\nNombre: ${v("nombre")}\nTeléfono: ${v("telefono")}\nLocalidad/dirección: ${v("zona")}\nTipo/cantidad: ${v("equipo")}\nServicio: ${v("servicio")}\nObservaciones: ${v("detalle")}`;
+            window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+        });
+        if ("IntersectionObserver" in window) {
+            const ob = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add("show");
+                    ob.unobserve(e.target);
+                }
+            }), { threshold: .08 });
+            document.querySelectorAll(".reveal").forEach(x => ob.observe(x));
+        } else {
+            document.querySelectorAll(".reveal").forEach(x => x.classList.add("show"));
+        }
+        (() => {
+            const KEY = "extinLibreCookieConsent",
+                banner = document.getElementById("cookieBanner"),
+                settings = document.getElementById("cookieSettings"),
+                reopen = document.getElementById("cookieReopen");
+            if (!banner || !settings || !reopen) return;
+            const analytics = document.getElementById("cookieAnalytics"),
+                marketing = document.getElementById("cookieMarketing");
+            const read = () => { try { return JSON.parse(localStorage.getItem(KEY)) } catch (e) { return null } };
+            const apply = c => {
+                window.extintoresCookieConsent = { necessary: true, analytics: !!c.analytics, marketing: !!c.marketing };
+                window.dispatchEvent(new CustomEvent("extinlibre:consent", { detail: window.extintoresCookieConsent }));
+            };
+            const save = c => {
+                const v = { necessary: true, analytics: !!c.analytics, marketing: !!c.marketing, updatedAt: new Date().toISOString() };
+                try { localStorage.setItem(KEY, JSON.stringify(v)) } catch (e) {}
+                apply(v);
+                banner.hidden = true;
+                settings.hidden = true;
+                reopen.hidden = false;
+            };
+            const open = () => {
+                const c = read() || {};
+                analytics.checked = !!c.analytics;
+                marketing.checked = !!c.marketing;
+                settings.hidden = false;
+            };
+            document.getElementById("cookieAccept").onclick = () => save({ analytics: true, marketing: true });
+            document.getElementById("cookieReject").onclick = () => save({ analytics: false, marketing: false });
+            document.getElementById("cookieCustomize").onclick = open;
+            document.getElementById("cookieSave").onclick = () => save({ analytics: analytics.checked, marketing: marketing.checked });
+            document.getElementById("cookieCancel").onclick = () => settings.hidden = true;
+            reopen.onclick = open;
+            document.querySelectorAll("[data-cookie-open]").forEach(x => x.onclick = e => { e.preventDefault(); open() });
+            settings.addEventListener("click", e => { if (e.target === settings) settings.hidden = true });
+            const saved = read();
+            if (saved) { apply(saved); reopen.hidden = false; } else banner.hidden = false;
+        })();
+    </script>
+</body>
+</html>
